@@ -17,10 +17,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<DataContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+//builder.Services.AddDbContext<DataContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//builder.Services.AddDbContext<DataContext>(options =>
+//options.UseInMemoryDatabase(databaseName: "BlazorEcommerceDb"));
+
+builder.Services.AddDbContext<DataContext>
+    (options => options.UseSqlite("Data Source=sqlitedemo.db"));
+
+//var connectionString = builder.Configuration.GetConnectionString("BlazorEcommerceWebApiMySql");
+//builder.Services.AddDbContext<DataContext>
+//    (options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
